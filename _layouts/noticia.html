@@ -1,0 +1,21 @@
+---
+layout: base
+---
+<article>
+  <header class="banda titulo-pagina">
+    <div class="contenedor">
+      <p class="meta">{{ page.tipo | default: "Noticia" }} · {% include fecha.html fecha=page.date %}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="entradilla">{{ page.description }}</p>{% endif %}
+    </div>
+  </header>
+  <div class="noticia-cuerpo">
+    <div class="contenedor">
+      <div class="texto">
+{{ content }}
+        {% if page.ia %}<p class="aviso-ia">Texto redactado con ayuda de inteligencia artificial y revisado antes de su publicación.</p>{% endif %}
+        <a class="volver" href="{{ '/noticias/' | relative_url }}">← Todas las noticias</a>
+      </div>
+    </div>
+  </div>
+</article>

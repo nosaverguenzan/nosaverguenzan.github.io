@@ -1,0 +1,17 @@
+<header class="cabecera">
+  <div class="contenedor">
+    <nav aria-label="Principal">
+      <ul class="nav">
+        <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Inicio</a></li>
+        <li><a href="{{ '/enmienda/' | relative_url }}"{% if page.url contains '/enmienda/' %} aria-current="page"{% endif %}>La enmienda</a></li>
+        <li><a href="{{ '/sumarse/' | relative_url }}"{% if page.url == '/sumarse/' %} aria-current="page"{% endif %}>Cómo sumarse</a></li>
+        <li><a href="{{ '/instituciones/' | relative_url }}"{% if page.url == '/instituciones/' %} aria-current="page"{% endif %}>Instituciones</a></li>
+        <li><a href="{{ '/noticias/' | relative_url }}"{% if page.url contains '/noticias/' %} aria-current="page"{% endif %}>Noticias</a></li>
+        <li><a href="{{ '/prensa/' | relative_url }}"{% if page.url == '/prensa/' %} aria-current="page"{% endif %}>Prensa</a></li>
+        <li><a href="{{ '/verificacion/' | relative_url }}"{% if page.url == '/verificacion/' %} aria-current="page"{% endif %}>Verificación</a></li>
+        <li><a href="{{ '/contacto/' | relative_url }}"{% if page.url == '/contacto/' %} aria-current="page"{% endif %}>Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="boton-descarga" href="{{ '/descargas/UNA_en_blanco.pdf' | relative_url }}">Descargar la enmienda (PDF)</a>
+  </div>
+</header>

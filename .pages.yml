@@ -1,0 +1,56 @@
+media:
+  input: assets/img
+  output: /assets/img
+
+content:
+  - name: noticias
+    label: Noticias y notas de prensa
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    fields:
+      - name: title
+        label: Titular
+        type: string
+        required: true
+      - name: date
+        label: Fecha
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: tipo
+        label: Tipo
+        type: select
+        options:
+          values: [Noticia, Nota de prensa]
+      - name: description
+        label: Entradilla
+        type: text
+      - name: ia
+        label: Redactado con ayuda de IA
+        type: boolean
+      - name: body
+        label: Texto
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: estado
+    label: Estado del procedimiento
+    type: file
+    path: _data/estado.yml
+    fields:
+      - name: estado
+        label: Estado
+        type: string
+      - name: fecha
+        label: Fecha de presentación
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: registro
+        label: N.º de registro
+        type: string
+      - name: expediente
+        label: N.º de expediente del Defensor (cuando lo asigne)
+        type: string

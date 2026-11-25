@@ -1,0 +1,4 @@
+{%- assign f_dia = include.fecha | date: "%-d" -%}
+{%- assign f_mes = include.fecha | date: "%-m" | plus: 0 | minus: 1 -%}
+{%- assign f_anio = include.fecha | date: "%Y" -%}
+{{- f_dia }} de {{ site.data.meses[f_mes] }} de {{ f_anio -}}

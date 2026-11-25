@@ -1,0 +1,148 @@
+---
+layout: base
+---
+<section class="banda portada-heroe">
+  <div class="contenedor">
+    <p class="antetitulo">Enmienda a la totalidad y reclamación universal de derechos humanos</p>
+    <h1 class="titulo-grande">Ustedes<br><span class="sin-corte">NOS AVERGÜENZAN</span></h1>
+    <div class="fila-heroe">
+      <div class="principal">
+        <p class="entradilla-grande">EL PUEBLO SOBERANO DEL REINO DE ESPAÑA pide la revisión total de la Constitución por el procedimiento del artículo 168 y la reparación de los agravios que quince movimientos sociales han denunciado durante décadas.</p>
+        <div class="botones">
+          <a class="boton boton-lleno" href="{{ '/enmienda/' | relative_url }}">Leer la enmienda</a>
+          <a class="boton boton-hueco" href="{{ '/sumarse/#firmar' | relative_url }}">Adherirse</a>
+          <a class="boton boton-hueco" href="{{ '/sumarse/#caso' | relative_url }}">Aportar un caso</a>
+        </div>
+      </div>
+      <aside class="estado" aria-label="Estado del procedimiento">
+        <p class="antetitulo">Estado del procedimiento</p>
+        <p class="estado-titulo">{{ site.data.estado.estado }}</p>
+        <p class="estado-datos">
+          {% include fecha.html fecha=site.data.estado.fecha %}<br>
+          N.º de registro: <code>{{ site.data.estado.registro }}</code>
+          {% if site.data.estado.expediente != "" and site.data.estado.expediente %}<br>N.º de expediente: <code>{{ site.data.estado.expediente }}</code>{% endif %}
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" style="border-top:0">
+  <div class="contenedor">
+    <h2>Qué pide la enmienda</h2>
+    <p class="intro">Que el orden constitucional de 1978 vuelva a su titular, el pueblo soberano.</p>
+    <div class="columnas">
+      <div class="columna">
+        <p class="numeral">I</p>
+        <h3>Revisión total de la Constitución</h3>
+        <p>Por el procedimiento del artículo 168, que termina con un referéndum.</p>
+      </div>
+      <div class="columna">
+        <p class="numeral">II</p>
+        <h3>Una carta de agravios</h3>
+        <p>Quince ámbitos, cada uno con su agravio y su exigencia, acreditados con sentencias, dictámenes e informes oficiales.</p>
+      </div>
+      <div class="columna">
+        <p class="numeral">III</p>
+        <h3>Acciones ante las instituciones</h3>
+        <p>Queja al Defensor del Pueblo, traslado al Ministerio Fiscal y comunicaciones a los organismos internacionales de derechos humanos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="ambitos">
+  <div class="contenedor">
+    <h2>Los quince ámbitos</h2>
+    <ol class="lista-ambitos">
+      {% for a in site.data.ambitos %}<li><span class="num">{{ forloop.index }}</span><span>{{ a }}</span></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="seccion seccion-gris" id="sumarse">
+  <div class="contenedor">
+    <h2>Cómo sumarse</h2>
+    <div class="tarjetas">
+      <div class="tarjeta">
+        <h3>Firmar una hoja</h3>
+        <p>Descargue la hoja, rellene su fila y fírmela a mano. Puede entregarla a quien recoge firmas o presentarla usted.</p>
+        <div class="enlaces">
+          <a href="{{ '/descargas/Hoja_de_firmas.pdf' | relative_url }}">Hoja de firmas (PDF)</a>
+          <a href="{{ '/sumarse/#firmar' | relative_url }}">Instrucciones</a>
+        </div>
+      </div>
+      <div class="tarjeta">
+        <h3>Presentarla a su nombre</h3>
+        <p>En una oficina de Correos (ORVE), en el Registro Electrónico General con Cl@ve o por correo electrónico al Defensor del Pueblo.</p>
+        <div class="enlaces"><a href="{{ '/sumarse/#presentar' | relative_url }}">Guía paso a paso</a></div>
+      </div>
+      <div class="tarjeta">
+        <h3>Aportar un caso</h3>
+        <p>Con la ficha del Anexo II, ante el Defensor del Pueblo, dentro del año siguiente a conocer los hechos.</p>
+        <div class="enlaces">
+          <a href="{{ '/descargas/Ficha_de_caso_Anexo_II.pdf' | relative_url }}">Ficha (PDF)</a>
+          <a href="{{ '/sumarse/#caso' | relative_url }}">Requisitos</a>
+        </div>
+      </div>
+    </div>
+    <p class="nota">Cite siempre el n.º de registro <code class="codigo">{{ site.data.estado.registro }}</code>. Las firmas recogidas en plataformas en línea no tienen validez legal.</p>
+  </div>
+</section>
+
+<section class="seccion" id="calendario">
+  <div class="contenedor">
+    <h2>Calendario institucional</h2>
+    <ol class="calendario">
+      <li><span class="cuando">25 de noviembre de 2026</span><span class="que"><strong>Defensor del Pueblo.</strong> Queja presentada. Ya admite adhesiones y casos.</span></li>
+      <li><span class="cuando">Ya</span><span class="que"><strong>Parlamentos autonómicos.</strong> Pueden llevar la reforma a las Cortes (arts. 87.2 y 166 CE).</span></li>
+      <li><span class="cuando">Desde el 23 de diciembre de 2026</span><span class="que"><strong>Cortes Generales.</strong> Mesas del Congreso y del Senado.</span></li>
+      <li><span class="cuando">Tras la investidura</span><span class="que"><strong>Gobierno.</strong> Un Gobierno en funciones no puede presentar proyectos de ley.</span></li>
+    </ol>
+    <a class="enlace-mas" href="{{ '/instituciones/' | relative_url }}">A qué instituciones dirigirse →</a>
+  </div>
+</section>
+
+<section class="seccion sobre-negro" id="noticias">
+  <div class="contenedor">
+    <h2>Noticias</h2>
+    <ul class="lista-noticias">
+      {% for post in site.posts limit:3 %}
+      <li>
+        <p class="meta">{{ post.tipo | default: "Noticia" }} · {% include fecha.html fecha=post.date %}</p>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    <a class="enlace-mas" href="{{ '/noticias/' | relative_url }}">Todas las noticias →</a>
+  </div>
+</section>
+
+<section class="seccion verificacion-portada" id="verificacion">
+  <div class="contenedor">
+    <div class="izq">
+      <h2>Verificación del texto</h2>
+      <p>Cualquier cambio en el archivo altera su huella. El original está sellado con OpenTimestamps en la cadena de bloques de Bitcoin.</p>
+      <a class="enlace-mas" href="{{ '/verificacion/' | relative_url }}">Comprobar un archivo →</a>
+    </div>
+    <div class="der">
+      <p class="huella-etiqueta">Original presentado · SHA-256</p>
+      <p class="huella">71e025f07b47d8a46d2f7f2d7d8a9ed3325238de8d8d7e7cdf9ee92301d0ce31</p>
+      <p class="huella-etiqueta">Versión para adhesiones · SHA-256</p>
+      <p class="huella">def8d8074ccd2833ed3270f8884c8d8c6f01bdfd845a3b5c3b8f3e721f74f085</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion seccion-gris" aria-label="Seguir las novedades">
+  <div class="contenedor">
+    <h2>Seguir las novedades</h2>
+    <p class="intro" style="margin-bottom:20px">Las novedades del procedimiento se publican en la sección de noticias y en el canal RSS, que puede seguir con cualquier lector de noticias sin dar ningún dato personal.</p>
+    <div class="botones" style="margin-top:0">
+      <a class="boton boton-negro" href="{{ '/feed.xml' | relative_url }}">Canal RSS</a>
+      <a class="boton" href="{{ '/noticias/' | relative_url }}">Noticias</a>
+    </div>
+  </div>
+</section>

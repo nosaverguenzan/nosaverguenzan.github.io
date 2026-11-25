@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+{% seo %}
+{% feed_meta %}
+<link rel="stylesheet" href="{{ '/assets/css/estilo.css' | relative_url }}">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+{% include cabecera.html %}
+<main id="contenido">
+{{ content }}
+</main>
+{% include pie.html %}
+</body>
+</html>
