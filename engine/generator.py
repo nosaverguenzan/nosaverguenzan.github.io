@@ -1,10 +1,11 @@
 import json
 import os
-import time
 import httpx
 from engine.normalizer import normalizar_tipografia
 from engine.prompts import SYSTEM_PROMPT_AUDITORA
 from engine.schemas import FichaDoctrinal, MetadatosBOE, SeccionesGoldStandard, ValidationError
+
+RUTA_OAI = "/v1/chat/completions"
 
 
 def _llamar_openai_compat(url: str, key: str, model: str, prompt: str, client: httpx.Client) -> str:
@@ -22,20 +23,17 @@ def _llamar_openai_compat(url: str, key: str, model: str, prompt: str, client: h
 
 
 def _llamar_llm(prompt: str) -> dict:
-    time.sleep(3)
     cascada = [
-        ("gemini", os.environ.get("LLM_API_KEY", ""), "https://googleapis.com", "gemini-2.5-flash"),
-        ("groq", os.environ.get("GROQ_API_KEY", ""), "https://groq.com", "llama-3.3-70b-versatile"),
-        ("deepseek", os.environ.get("DEEPSEEK_API_KEY", ""), "https://deepseek.com", "deepseek-chat"),
-        ("openai", os.environ.get("OPENAI_API_KEY", ""), "https://openai.com", "gpt-4o-mini"),
-        ("kimi", os.environ.get("MOONSHOT_API_KEY", ""), "https://moonshot.cn", "moonshot-v1-8k"),
-        ("mistral", os.environ.get("MISTRAL_API_KEY", ""), "https://mistral.ai", "mistral-small-latest"),
-        ("or-deepseek", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai", "deepseek/deepseek-chat-v3-0324:free"),
-        ("or-kimi", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai", "moonshotai/kimi-k2:free"),
-        ("or-llama", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai", "meta-llama/llama-3.3-70b-instruct:free"),
+        ("groq", os.environ.get("GROQ_API_KEY", ""), "https://groq.com" + "/openai" + RUTA_OAI, "llama-3.3-70b-versatile"),
+        ("deepseek", os.environ.get("DEEPSEEK_API_KEY", ""), "https://deepseek.com" + RUTA_OAI, "deepseek-chat"),
+        ("openai", os.environ.get("OPENAI_API_KEY", ""), "https://openai.com" + RUTA_OAI, "gpt-4o-mini"),
+        ("mistral", os.environ.get("MISTRAL_API_KEY", ""), "https://mistral.ai" + RUTA_OAI, "mistral-small-latest"),
+        ("kimi", os.environ.get("MOONSHOT_API_KEY", ""), "https://moonshot.cn" + RUTA_OAI, "moonshot-v1-8k"),
+        ("gemini", os.environ.get("LLM_API_KEY", ""), "https://googleapis.com" + "/v1beta/models/gemini-2.5-flash:generateContent", "gemini-2.5-flash"),
+        ("or-llama", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai" + "/api" + RUTA_OAI, "meta-llama/llama-3.3-70b-instruct:free"),
     ]
     ultimo_error = None
-    with httpx.Client(timeout=60.0) as client:
+    with httpx.Client(timeout=25.0) as client:
         for nombre, key, url, model in cascada:
             if not key:
                 continue
@@ -54,7 +52,7 @@ def _llamar_llm(prompt: str) -> dict:
                 return json.loads(txt)
             except Exception as e:
                 ultimo_error = e
-                print(f"Fallo en {nombre} ({e}), saltando al siguiente...")
+                print(f"Fallo en {nombre} ({e}), saltando...", flush=True)
     raise ultimo_error or RuntimeError("No hay API Key configurada")
 
 
@@ -69,16 +67,15 @@ def generar_ficha_boe(item_boe: dict) -> FichaDoctrinal:
         sha256_xml=item_boe["sha256_xml"],
     )
     prompt = (
-        "Analiza esta novedad del BOE y devuelve un JSON con las claves exactas: "
+        "Analiza esta novedad del BOE y devuelve JSON con las claves exactas: "
         "titulo_encabezado, subtitulo_pregunta, cita_literal_bloque, "
-        "articulos_ce_relacionados (lista de numeros), "
-        "i_texto_literal_y_eficacia, ii_contradicciones_organicas, "
-        "iii_jurisprudencia_control, iv_indicadores_empiricos, "
-        "v_marco_teorico_critico, vi_reclamaciones_minimos.\n\n"
+        "articulos_ce_relacionados, i_texto_literal_y_eficacia, "
+        "ii_contradicciones_organicas, iii_jurisprudencia_control, "
+        "iv_indicadores_empiricos, v_marco_teorico_critico, vi_reclamaciones_minimos.\n\n"
         f"NORMA BOE:\n{item_boe['xml_podado']}"
     )
     error_reparacion = ""
-    for _ in range(3):
+    for _ in range(2):
         try:
             data = _llamar_llm(prompt + error_reparacion)
             sec = SeccionesGoldStandard(
@@ -101,5 +98,5 @@ def generar_ficha_boe(item_boe: dict) -> FichaDoctrinal:
                 secciones=sec,
             )
         except ValidationError as err:
-            error_reparacion = f"\n\nCORRIGE ESTE ERROR DE VALIDACION EN TU JSON ANTERIOR: {err}"
-    raise RuntimeError(f"No se pudo validar la ficha tras 3 intentos: {error_reparacion}")
+            error_reparacion = f"\nCORRIGE ESTE ERROR DE VALIDACION: {err}"
+    raise RuntimeError(f"No se pudo validar la ficha: {error_reparacion}")
