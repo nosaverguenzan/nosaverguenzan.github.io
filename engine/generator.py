@@ -11,7 +11,7 @@ def _extraer_json(txt: str) -> dict:
     return json.loads(limpio)
 
 def _llamar_openai_compat(url: str, key: str, model: str, prompt: str, client: httpx.Client) -> str:
-    body = {"model": model, "messages": [{"role": "system", "content": SYSTEM_PROMPTP_AUDITORA if False else SUSTEM_PROMPT_AUDITORA + "\nResponde EXCLUSIVAMENTE en formato JSON valido."}, {"role": "user", "content": prompt}]}
+    body = {"model": model, "messages": [{"role": "system", "content": SYSTEM_PROMPT_AUDITORA if False else SYSTEM_PROMPT_AUDITORA + "\nResponde EXCLUSIVAMENTE en formato JSON valido."}, {"role": "user", "content": prompt}]}
     r = client.post(url, headers={"Authorization": f"Bearer {key}"}, json=body)
     r.raise_for_status()
     return r.json()["choices"][0]["message"]["content"]
