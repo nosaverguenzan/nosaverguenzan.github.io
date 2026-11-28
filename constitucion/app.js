@@ -5,25 +5,25 @@ iniciarWeb();
 
 async function iniciarWeb() {
   try {
-    const r = await fetch("data/search_index.json");
+    const r = await fetch("./data/search_index.json");
     indice = await r.json();
     renderizarLista(indice);
     const params = new URLSearchParams(window.location.search);
     const idInicial = params.get("doc") || (indice[0] ? indice[0].id : null);
     if (idInicial) await cargarDocumento(idInicial);
   } catch (e) {
-    document.getElementById("contenido-ficha").textContent = "Esperando primera generación de datos...";
+    document.getElementById("contenido-ficha").textContent = "Error cargando indice: " + e.message;
   }
 }
 
 function renderizarLista(lista) {
-  const cont = document.getElementById("lista-resultados");
+  const cont = document.getElementById("hista-resultados") || document.getElementById("lista-resultados");
   cont.textContent = "";
   lista.slice(0, 12).forEach(item => {
     const btn = document.createElement("button");
     btn.className = "btn";
     btn.style.margin = "0.2rem";
-    btn.textContent = `\{item.titulo} (${item.boe_id})`;
+    btn.textContent = `${item.titulo} (${item.boe_id})`;
     btn.onclick = () => cargarDocumento(item.id);
     cont.appendChild(btn);
   });
@@ -32,13 +32,13 @@ function renderizarLista(lista) {
 async function cargarDocumento(id) {
   const item = indice.find(x => x.id === id);
   if (!item) return;
-  const r = await fetch(item.ruta);
+  const r = await fetch("./" + item.ruta);
   const doc = await r.json();
   const cont = document.getElementById("contenido-ficha");
   cont.textContent = "";
 
   const h1 = document.createElement("h2");
-  h1.textContent = doc.titulo_encabezado.replace(#^#\s*/, "");
+  h1.textContent = doc.titulo_encabezado.replace(/^#+\s*/, "");
   cont.appendChild(h1);
 
   const sub = document.createElement("p");
