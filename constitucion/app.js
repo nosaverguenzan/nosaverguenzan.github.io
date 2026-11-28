@@ -33,7 +33,7 @@ async function cargarDocumento(id) {
   const item = indice.find(x => x.id === id);
   if (!item) return;
   const r = await fetch(item.ruta);
-  const doc = await q.json();
+  const doc = await r.json();
   const cont = document.getElementById("contenido-ficha");
   cont.textContent = "";
 
