@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import httpx
 from engine.normalizer import normalizar_tipografia
 from engine.prompts import SYSTEM_PROMPT_AUDITORA
@@ -8,29 +9,36 @@ from engine.schemas import FichaDoctrinal, MetadatosBOE, SeccionesGoldStandard, 
 RUTA_OAI = "/v1/chat/completions"
 
 
+def _extraer_json(txt: str) -> dict:
+    limpio = re.sub(r"^```(?:json)?\s*|\s*```$", "", txt.strip(), flags=re.IGNORECASE)
+    ini, fin = limpio.find("{"), limpio.rfind("}")
+    if ini != -1 and fin != -1:
+        limpio = limpio[ini : fin + 1]
+    return json.loads(limpio)
+
+
 def _llamar_openai_compat(url: str, key: str, model: str, prompt: str, client: httpx.Client) -> str:
     body = {
         "model": model,
-        "response_format": {"type": "json_object"},
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT_AUDITORA},
+            {"role": "system", "content": SYSTEM_PROMPT_AUDITORA + "\nResponde EXCLUSIVAMENTE en formato JSON valido."},
             {"role": "user", "content": prompt},
         ],
     }
     r = client.post(url, headers={"Authorization": f"Bearer {key}"}, json=body)
     r.raise_for_status()
-    return r.json()["choices"][0]["message"]["content"]
+    return r.json()["choices"]["message"]["content"]
 
 
 def _llamar_llm(prompt: str) -> dict:
     cascada = [
         ("groq", os.environ.get("GROQ_API_KEY", ""), "https://" + "://groq.com" + "/openai" + RUTA_OAI, "llama-3.3-70b-versatile"),
-        ("openrouter", os.environ.get("OPENROUTER_API_KEY", ""), "https://" + "openrouter.ai" + "/api" + RUTA_OAI, "openrouter/free"),
+        ("mistral", os.environ.get("MISTRAL_API_KEY", ""), "https://" + "api.mistral.ai" + RUTA_OAI, "mistral-small-latest"),
         ("deepseek", os.environ.get("DEEPSEEK_API_KEY", ""), "https://" + "://deepseek.com" + RUTA_OAI, "deepseek-chat"),
         ("openai", os.environ.get("OPENAI_API_KEY", ""), "https://" + "://openai.com" + RUTA_OAI, "gpt-4o-mini"),
-        ("mistral", os.environ.get("MISTRAL_API_KEY", ""), "https://" + "api.mistral.ai" + RUTA_OAI, "mistral-small-latest"),
         ("kimi", os.environ.get("MOONSHOT_API_KEY", ""), "https://" + "api.moonshot.ai" + RUTA_OAI, "moonshot-v1-8k"),
         ("gemini", os.environ.get("LLM_API_KEY", ""), "https://" + "://googleapis.com" + "/v1beta/models/gemini-2.5-flash:generateContent", "gemini-2.5-flash"),
+        ("openrouter", os.environ.get("OPENROUTER_API_KEY", ""), "https://" + "openrouter.ai" + "/api" + RUTA_OAI, "meta-llama/llama-3.3-70b-instruct:free"),
     ]
     ultimo_error = None
     with httpx.Client(timeout=25.0, follow_redirects=True) as client:
@@ -46,10 +54,10 @@ def _llamar_llm(prompt: str) -> dict:
                     }
                     r = client.post(f"{url}?key={key}", json=body)
                     r.raise_for_status()
-                    txt = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+                    txt = r.json()["candidates"]["content"]["parts"]["text"]
                 else:
                     txt = _llamar_openai_compat(url, key, model, prompt, client)
-                return json.loads(txt)
+                return _extraer_json(txt)
             except Exception as e:
                 ultimo_error = e
                 print(f"Fallo en {nombre} ({e}), saltando...", flush=True)
