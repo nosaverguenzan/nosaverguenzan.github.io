@@ -1,0 +1,84 @@
+---
+layout: pagina
+title: "Verificación"
+antetitulo: "Autenticidad del texto"
+entradilla: "Cada archivo tiene una huella digital única (SHA-256). Si cambia una sola letra, la huella cambia. Así puede comprobar que tiene el texto auténtico."
+description: "Huellas SHA-256 y sello de tiempo de la enmienda «Ustedes NOS AVERGÜENZAN», y un comprobador que funciona en su propio dispositivo."
+---
+<h2>Comprobar un archivo</h2>
+<p>Elija un archivo descargado. La huella se calcula en su propio dispositivo: el archivo no se envía a ningún sitio.</p>
+<div class="comprobador">
+  <label for="archivo">Archivo que quiere comprobar</label>
+  <input type="file" id="archivo">
+  <p class="resultado" id="resultado" aria-live="polite"></p>
+</div>
+<noscript><p>El comprobador necesita JavaScript. Puede usar también los comandos de más abajo.</p></noscript>
+
+<h2>Huellas oficiales</h2>
+<p class="huella-etiqueta">Original presentado ante el Defensor del Pueblo</p>
+<p class="huella">71e025f07b47d8a46d2f7f2d7d8a9ed3325238de8d8d7e7cdf9ee92301d0ce31</p>
+<p class="huella-etiqueta">Versión para adhesiones (UNA_en_blanco.pdf)</p>
+<p class="huella">def8d8074ccd2833ed3270f8884c8d8c6f01bdfd845a3b5c3b8f3e721f74f085</p>
+<p class="huella-etiqueta">Hoja de firmas (Hoja_de_firmas.pdf)</p>
+<p class="huella">cbb8261196f0be0edda247c5cce6f67063e9a2935975b769deb1cbc4b5db3c6a</p>
+<p class="huella-etiqueta">Ficha de caso (Ficha_de_caso_Anexo_II.pdf)</p>
+<p class="huella">566912980209f3b853705f2bee4560f788ca209e6b7533cbd31765e918a05351</p>
+
+<h2>Por qué hay dos huellas de la enmienda</h2>
+<p>El original lleva los datos personales de quien lo presentó y no se publica. La versión para adhesiones es otro archivo y tiene otra huella: lleva impresos el número de registro y la huella del original, para que cualquiera pueda relacionarlos.</p>
+
+<h2>Sello de tiempo</h2>
+<p>Antes de presentarlo, el original se selló con <a href="https://opentimestamps.org" rel="noopener">OpenTimestamps</a>, que ancla su huella en la cadena de bloques de Bitcoin. El sello demuestra que ese archivo existía el 25 de noviembre de 2026 y que no ha cambiado desde entonces.</p>
+<p><a href="{{ '/descargas/UNA_original.pdf.ots' | relative_url }}">Descargar el sello del original (.ots)</a>. La comprobación completa requiere el archivo original, que custodia quien lo presentó.</p>
+
+<h2>Con el ordenador</h2>
+<p>Abra una terminal en la carpeta del archivo y escriba:</p>
+<ul>
+  <li>Windows: <code>certutil -hashfile UNA_en_blanco.pdf SHA256</code></li>
+  <li>Mac o Linux: <code>shasum -a 256 UNA_en_blanco.pdf</code></li>
+</ul>
+<p>El resultado debe coincidir con la huella de la lista.</p>
+
+<script>
+(function () {
+  var conocidas = {
+    "71e025f07b47d8a46d2f7f2d7d8a9ed3325238de8d8d7e7cdf9ee92301d0ce31": "el original presentado ante el Defensor del Pueblo",
+    "def8d8074ccd2833ed3270f8884c8d8c6f01bdfd845a3b5c3b8f3e721f74f085": "la versión para adhesiones de la enmienda",
+    "cbb8261196f0be0edda247c5cce6f67063e9a2935975b769deb1cbc4b5db3c6a": "la hoja de firmas",
+    "566912980209f3b853705f2bee4560f788ca209e6b7533cbd31765e918a05351": "la ficha de caso del Anexo II"
+  };
+  var entrada = document.getElementById("archivo");
+  var salida = document.getElementById("resultado");
+  if (!entrada || !window.crypto || !window.crypto.subtle) {
+    if (salida) salida.textContent = "Su navegador no permite calcular la huella. Use los comandos de más abajo.";
+    return;
+  }
+  entrada.addEventListener("change", function () {
+    var f = entrada.files && entrada.files[0];
+    if (!f) return;
+    salida.textContent = "Calculando…";
+    f.arrayBuffer().then(function (buf) {
+      return crypto.subtle.digest("SHA-256", buf);
+    }).then(function (h) {
+      var hex = Array.prototype.map.call(new Uint8Array(h), function (b) {
+        return ("0" + b.toString(16)).slice(-2);
+      }).join("");
+      salida.innerHTML = "";
+      var linea = document.createElement("strong");
+      var cod = document.createElement("code");
+      cod.textContent = hex;
+      if (conocidas[hex]) {
+        linea.textContent = "Coincide: es " + conocidas[hex] + ", sin modificar.";
+      } else {
+        linea.textContent = "No coincide con ninguna huella oficial. El archivo no es uno de los publicados o ha sido modificado.";
+      }
+      salida.appendChild(linea);
+      salida.appendChild(document.createElement("br"));
+      salida.appendChild(document.createTextNode("Huella calculada: "));
+      salida.appendChild(cod);
+    }).catch(function () {
+      salida.textContent = "No se ha podido leer el archivo.";
+    });
+  });
+})();
+</script>

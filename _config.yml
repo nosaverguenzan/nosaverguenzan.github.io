@@ -1,0 +1,38 @@
+title: "Ustedes NOS AVERGÜENZAN"
+tagline: "Enmienda a la totalidad y reclamación universal de derechos humanos"
+description: "Enmienda a la totalidad y reclamación universal de derechos humanos. Pide la revisión total de la Constitución (art. 168 CE) y se ha presentado como queja ante el Defensor del Pueblo. Cómo adherirse o aportar un caso."
+url: "https://nosaverguenzan.org"
+baseurl: ""
+lang: es
+locale: es_ES
+timezone: Europe/Madrid
+
+# Correos de contacto (reenvían al buzón de la plataforma)
+correo: "info@nosaverguenzan.org"
+correo_prensa: "prensa@nosaverguenzan.org"
+
+permalink: /noticias/:year/:month/:day/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: noticia
+      tipo: "Noticia"
+
+exclude:
+  - README.md

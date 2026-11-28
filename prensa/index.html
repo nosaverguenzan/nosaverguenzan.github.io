@@ -1,0 +1,48 @@
+---
+layout: pagina
+title: "Prensa"
+antetitulo: "Sala de prensa"
+entradilla: "Notas de prensa, datos clave y materiales de la enmienda «Ustedes NOS AVERGÜENZAN»."
+description: "Notas de prensa, datos clave y contacto para medios de la enmienda «Ustedes NOS AVERGÜENZAN»."
+---
+<h2>Contacto para medios</h2>
+<p><a href="mailto:{{ site.correo_prensa }}">{{ site.correo_prensa }}</a></p>
+<p>La plataforma es anónima: la enmienda no tiene autor y la presenta quien la firma. Las consultas se responden por escrito.</p>
+
+<h2>Datos clave</h2>
+<div class="tabla-envoltorio">
+<table class="tabla-datos">
+  <tbody>
+    <tr><td>Título</td><td>«Ustedes NOS AVERGÜENZAN». Enmienda a la totalidad y reclamación universal de derechos humanos</td></tr>
+    <tr><td>Qué pide</td><td>La revisión total de la Constitución por el procedimiento del artículo 168 y la reparación de los agravios de quince ámbitos</td></tr>
+    <tr><td>Presentación</td><td>Como queja ante el Defensor del Pueblo, el {% include fecha.html fecha=site.data.estado.fecha %}</td></tr>
+    <tr><td>N.º de registro</td><td><code>{{ site.data.estado.registro }}</code></td></tr>
+    <tr><td>N.º de expediente</td><td>{% if site.data.estado.expediente != "" and site.data.estado.expediente %}<code>{{ site.data.estado.expediente }}</code>{% else %}Pendiente de asignación{% endif %}</td></tr>
+    <tr><td>Huella SHA-256 del original</td><td><code>71e025f07b47d8a46d2f7f2d7d8a9ed3325238de8d8d7e7cdf9ee92301d0ce31</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Notas de prensa</h2>
+{% assign notas = site.posts | where: "tipo", "Nota de prensa" %}
+{% if notas.size > 0 %}
+<ul class="lista-noticias claro">
+  {% for post in notas %}
+  <li>
+    <p class="meta">{% include fecha.html fecha=post.date %}</p>
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Todavía no hay notas de prensa.</p>
+{% endif %}
+
+<h2>Materiales</h2>
+<ul>
+  <li><a href="{{ '/descargas/UNA_en_blanco.pdf' | relative_url }}">Texto de la enmienda (PDF)</a></li>
+  <li><a href="{{ '/enmienda/texto/' | relative_url }}">Texto de la enmienda en la web</a></li>
+  <li><a href="{{ '/verificacion/' | relative_url }}">Huellas y sello de tiempo</a></li>
+</ul>
+<p>Todos los textos y materiales están en dominio público (<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es" rel="license noopener">CC0 1.0 Universal</a>): pueden reproducirse sin pedir permiso. Difunda los PDF sin modificar, para que conserven su huella.</p>
