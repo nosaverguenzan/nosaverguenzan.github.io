@@ -36,3 +36,9 @@ defaults:
 
 exclude:
   - README.md
+
+exclude:
+  - engine/
+  - tests/
+  - requirements.txt
+  - instalar_motor.sh

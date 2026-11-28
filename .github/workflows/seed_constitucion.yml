@@ -1,27 +1,39 @@
-name: Generar Articulos Constitucion (Lotes)
-
+name: Generar Articulos Constitucion
 on:
   workflow_dispatch:
     inputs:
       desde:
-        description: "Articulo inicial (1-169)"
+        description: Articulo inicial
         required: true
         default: "1"
       hasta:
-        description: "Articulo final (1-169)"
+        description: Articulo final
         required: true
         default: "5"
-
 permissions:
   contents: write
-
 jobs:
-  generar-lote:
+  generar:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
       - run: pip install -r requirements.txt
-      - env# ¢ÄÄÕô•ô´U“¢G·²6V7&WG2äÄÄÕô•ô´U’×Ð¢u$õô•ô´U“¢G·²6V7&WG2äu$õô•ô´U’×Ð¢DTU4TTµô•ô´U“¢G·²6V7&WG2äDTU4TTµô•ô´U’×Ð¢õTä•ô•ô´U“¢G·²6V7&WG2äõTä•ô•ô´U’×Ð¢Ôôôå4„õEô•ô´U“¢G·²6V7&WG2äÔôôå4„õEô•ô´U’×Ð¢Ô•5E$Åô•ô´U“¢G·²6V7&WG2äÔ•5E$Åô•ô´U’×Ð¢õTå$õUDU%ô•ô´U“¢G·²6V7&WG2äõTå$õUDU%ô•ô´U’×Ð¢'Vã¢—F†öâÖ2&g&öÒVæv–æRæ6öææV7F÷'2æ6öç7F—GV6–öâ–×÷'BvVæW&%öÆ÷FS²vVæW&%öÆ÷FR†–çB‚rG·²v—F‡V"æWfVçBæ–çWG2æFW6FR×Òr’Â–çB‚rG·²v—F‡V"æWfVçBæ–çWG2æ†7F×Òr’’ ¢Ò'Vã¢—FW7BFW7G2ð¢Ò'Vã¢À¢v—B6öæf–rW6W"ææÖR%6–ç7F—GV6–öâÔ&÷B ¢v—B6öæf–rW6W"æVÖ–Â&&÷D6–ç7F—GV6–öâæÆö6Â ¢v—BFB6öç7F—GV6–öâð¢v—B6öÖÖ—BÖÒ$vVæW&Æ÷FR'F–7VÆ÷24RVâv—D‡V"7F–öç2"ÇÂG'VP¢v—BW6€ 
+      - env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python -c "from engine.connectors.constitucion import generar_lote; generar_lote(int('${{ github.event.inputs.desde }}'), int('${{ github.event.inputs.hasta }}'))"
+      - run: pytest tests/
+      - run: |
+          git config user.name "Sinstitucion-Bot"
+          git config user.email "bot@sinstitucion.local"
+          git add constitucion/
+          git commit -m "Genera lote articulos CE" || true
+          git push
