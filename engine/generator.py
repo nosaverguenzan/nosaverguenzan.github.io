@@ -23,7 +23,7 @@ def _llamar_llm(prompt: str) -> dict:
         ("openai", os.environ.get("OPENAI_API_KEY", ""), "https://api.openai.com/v1/chat/completions", "gpt-4o-mini"),
         ("kimi", os.environ.get("MOONSHOT_API_KEY", ""), "https://api.moonshot.ai/v1/chat/completions", "moonshot-v1-8k"),
         ("gemini", os.environ.get("LLM_API_KEY", ""), "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", "gemini-2.5-flash"),
-        ("openrouter", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai/api/v1/chat/completions", "meta-llama/llama-3.3-70b-instruct:free"),
+        ("openrouter", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai/api/v1/chat/completions", "openrouter/free"),
     ]
     ultimo_error = None
     with httpx.Client(timeout=25.0, follow_redirects=True) as client:
@@ -40,7 +40,7 @@ def _llamar_llm(prompt: str) -> dict:
                 return _extraer_json(txt)
             except Exception as e:
                 ultimo_error = e
-                print(f"Fallo en {nombre} ({e}), saltando...", flush=True)
+                print(f"Fallo en {nombre}: {getattr(getattr(e, "response", None), "text", e)[:180]}, saltando...", flush=True)
     raise ultimo_error or RuntimeError("No hay API Key configurada")
 def generar_ficha_boe(item_boe: dict) -> FichaDoctrinal:
     meta = MetadatosBOE(fecha=item_boe["fecha"], boe_id=item_boe["boe_id"], rango=item_boe["rango"], titulo_norma=item_boe["titulo"], url_oficial=item_boe["hurl_oficial"] if False else item_boe["hurl"] if False else item_boe["url_oficial"], estado_vigencia="Pendiente de convalidación" if item_boe["rango"] == "Real Decreto-ley" else "En vigor", sha256_xml=item_boe["sha256_xml"])
