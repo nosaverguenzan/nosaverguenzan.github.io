@@ -1,28 +1,37 @@
 name: Monitor Diario BOE y Tribunal Constitucional
+
 on:
-schedule:
-- cron: '15 7 * * 1-6'
-workflow_dispatch:
+  schedule:
+    - cron: '15 7 * * 1-6'
+  workflow_dispatch:
+
 permissions:
-contents: write
-pull-requests: write
+  contents: write
+
+fail-fast: false
+
 jobs:
-ingesta-boe:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout repositorio
-uses: actions/checkout@v4
-- name: Configurar Python 3.12
-uses: actions/setup-python@v5
-with:
-python-version: '3.12'
-- name: Instalar dependencias
-run: pip install -r requirements.txt
-- name: Ejecutar Aduana de Calidad (Pytest)
-run: pytest tests/
-- name: Consultar novedades sustantivas BOE
-env:
-LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
-LLM_MODEL: ${{ secrets.LLM_MODEL }}
-run: python -m engine.run_boe_daily
+  ingesta-boe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: pytest tests/
+      - env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python -m engine.run_boe_daily
+      - run: |
+          git config user.name "Sinstitucion-Bot"
+          git config user.email "bot@sinstitucion.local"
+          git add constitucion/
+          git commit -m "Actualizacion doctrinal BOE $(date +%Y-%m-%d)" || true
+          git push

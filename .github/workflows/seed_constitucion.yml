@@ -1,0 +1,27 @@
+name: Generar Articulos Constitucion (Lotes)
+
+on:
+  workflow_dispatch:
+    inputs:
+      desde:
+        description: "Articulo inicial (1-169)"
+        required: true
+        default: "1"
+      hasta:
+        description: "Articulo final (1-169)"
+        required: true
+        default: "5"
+
+permissions:
+  contents: write
+
+jobs:
+  generar-lote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - env# ¢ÄÄÕô•ô´U“¢G·²6V7&WG2äÄÄÕô•ô´U’×Ğ¢u$õô•ô´U“¢G·²6V7&WG2äu$õô•ô´U’×Ğ¢DTU4TTµô•ô´U“¢G·²6V7&WG2äDTU4TTµô•ô´U’×Ğ¢õTä•ô•ô´U“¢G·²6V7&WG2äõTä•ô•ô´U’×Ğ¢Ôôôå4„õEô•ô´U“¢G·²6V7&WG2äÔôôå4„õEô•ô´U’×Ğ¢Ô•5E$Åô•ô´U“¢G·²6V7&WG2äÔ•5E$Åô•ô´U’×Ğ¢õTå$õUDU%ô•ô´U“¢G·²6V7&WG2äõTå$õUDU%ô•ô´U’×Ğ¢'Vã¢—F†öâÖ2&g&öÒVæv–æRæ6öææV7F÷'2æ6öç7F—GV6–öâ–×÷'BvVæW&%öÆ÷FS²vVæW&%öÆ÷FR†–çB‚rG·²v—F‡V"æWfVçBæ–çWG2æFW6FR×Òr’Â–çB‚rG·²v—F‡V"æWfVçBæ–çWG2æ†7F×Òr’’ ¢Ò'Vã¢—FW7BFW7G2ğ¢Ò'Vã¢À¢v—B6öæf–rW6W"ææÖR%6–ç7F—GV6–öâÔ&÷B ¢v—B6öæf–rW6W"æVÖ–Â&&÷D6–ç7F—GV6–öâæÆö6Â ¢v—BFB6öç7F—GV6–öâğ¢v—B6öÖÖ—BÖÒ$vVæW&Æ÷FR'F–7VÆ÷24RVâv—D‡V"7F–öç2"ÇÂG'VP¢v—BW6€ 
