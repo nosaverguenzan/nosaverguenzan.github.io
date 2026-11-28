@@ -24,16 +24,16 @@ def _llamar_openai_compat(url: str, key: str, model: str, prompt: str, client: h
 
 def _llamar_llm(prompt: str) -> dict:
     cascada = [
-        ("groq", os.environ.get("GROQ_API_KEY", ""), "https://groq.com" + "/openai" + RUTA_OAI, "llama-3.3-70b-versatile"),
-        ("deepseek", os.environ.get("DEEPSEEK_API_KEY", ""), "https://deepseek.com" + RUTA_OAI, "deepseek-chat"),
-        ("openai", os.environ.get("OPENAI_API_KEY", ""), "https://openai.com" + RUTA_OAI, "gpt-4o-mini"),
-        ("mistral", os.environ.get("MISTRAL_API_KEY", ""), "https://mistral.ai" + RUTA_OAI, "mistral-small-latest"),
-        ("kimi", os.environ.get("MOONSHOT_API_KEY", ""), "https://moonshot.cn" + RUTA_OAI, "moonshot-v1-8k"),
-        ("gemini", os.environ.get("LLM_API_KEY", ""), "https://googleapis.com" + "/v1beta/models/gemini-2.5-flash:generateContent", "gemini-2.5-flash"),
-        ("or-llama", os.environ.get("OPENROUTER_API_KEY", ""), "https://openrouter.ai" + "/api" + RUTA_OAI, "meta-llama/llama-3.3-70b-instruct:free"),
+        ("groq", os.environ.get("GROQ_API_KEY", ""), "https://" + "://groq.com" + "/openai" + RUTA_OAI, "llama-3.3-70b-versatile"),
+        ("openrouter", os.environ.get("OPENROUTER_API_KEY", ""), "https://" + "openrouter.ai" + "/api" + RUTA_OAI, "openrouter/free"),
+        ("deepseek", os.environ.get("DEEPSEEK_API_KEY", ""), "https://" + "://deepseek.com" + RUTA_OAI, "deepseek-chat"),
+        ("openai", os.environ.get("OPENAI_API_KEY", ""), "https://" + "://openai.com" + RUTA_OAI, "gpt-4o-mini"),
+        ("mistral", os.environ.get("MISTRAL_API_KEY", ""), "https://" + "api.mistral.ai" + RUTA_OAI, "mistral-small-latest"),
+        ("kimi", os.environ.get("MOONSHOT_API_KEY", ""), "https://" + "api.moonshot.ai" + RUTA_OAI, "moonshot-v1-8k"),
+        ("gemini", os.environ.get("LLM_API_KEY", ""), "https://" + "://googleapis.com" + "/v1beta/models/gemini-2.5-flash:generateContent", "gemini-2.5-flash"),
     ]
     ultimo_error = None
-    with httpx.Client(timeout=25.0) as client:
+    with httpx.Client(timeout=25.0, follow_redirects=True) as client:
         for nombre, key, url, model in cascada:
             if not key:
                 continue
