@@ -25,4 +25,4 @@ env:
 LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
 LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
 LLM_MODEL: ${{ secrets.LLM_MODEL }}
-run: python -m engine.connectors.boe
+run: python -m engine.run_boe_daily
