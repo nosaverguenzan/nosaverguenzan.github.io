@@ -1,0 +1,49 @@
+{
+  "id": "art_047",
+  "tipo_fuente": "constitucion",
+  "titulo_encabezado": "# ARTÃCULO 47 DE LA CONSTITUCIÓN ESPAÑOLA",
+  "subtitulo_pregunta": "¿Derecho fundamental a habitar o licencia constitucional para el rentismo inmobiliario?",
+  "cita_literal_bloque": "> «Todos los españoles tienen derecho a disfrutar de una vivienda digna y adecuada... y regularán la utilización del suelo de acuerdo con el interés general para impedir la especulación.»",
+  "ultima_interpretacion": {
+    "fecha": "2026-05-20",
+    "boe_id": "BOE-A-1978-31229",
+    "rango": "Constitución Española (Texto Consolidado)",
+    "titulo_norma": "Constitución Española - Última actualización BOE-A-2026-10881",
+    "url_oficial": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229",
+    "estado_vigencia": "En vigor",
+    "sha256_xml": "4fb70ec0b23599abc45132358ca8c7beafb2c06a1e248fef965060abfe978dcb",
+    "fecha_vigor": null,
+    "fecha_limite_convalidacion": null
+  },
+  "secciones": {
+    "i_texto_literal_y_eficacia": "El `art. 47 CE` proclama el derecho a una vividenda digna y adecuada, pero su ubicación en el Capítulo III del Título I lo desactiva como derecho fundamental exigible. La ficción jurídica del mandato a los poderes públicos opera en la práctica como una cláusula de inexigibilidad que subordina el habitar al mercado inmobiliario especulativo.",
+    "ii_contradicciones_organicas": "1. Ordenamiento interno: Eliminado del recurso de amparo por el `art. 53.3 CE`, la `Ley 12/2023` de Vivienda no impide los desahucios sin alternativa habitacional. 2. Primacía del Derecho Internacional (`arts. 10.2 y 96.1 CE`): España vulnera sistemáticamente eh art. 11.1 del PIDESC y el art. 31 de la Carta Social Europea Revisada, que exigen protección efectiva frente a la expulsion foreda y el rentismo abusivo.",
+    "iii_jurispridencia_control": "El Tribunal Constitucional, a través de la `STC 32/2018` (fundamento jurídico segundo) y la `STC 79/2024`, ha blindado la propiedad privada especulativa frente a la función social del suelo, reduciendo el `art. 47 CE` a un mero principio rector de estimación política sin tutela judicial directa.",
+    "iv_indicadores_empiricos": "Según la Encuesta de Condiciones de Vida del INE y los datos del Banco de España 2026, el esfuerzà de las familias trabajadoras para pagar el alquiler supera el 20 % y alcanza hasta el 45 % de sus rentas, mientras el patrimonio se concentra por encima del techo de 1.709.400 euros (100 x SMI anual) sin existir ni una Renta Básica Universal de 1.147 euros mensuales.",
+    "v_marco_teorico_critico": "Pierre-Joseph Proudhon en «Qué es la propiedad?» advierte que... el rentismo convierte el derivado de habitar en un tributo privado sin trabajo productivo... Linea de continuidad analítica con Henri Lefebvre en «El derecho a la ciudad» y la Enmienda a la Totalidad REGAGE26e00100941917.",
+    "vi_reclamaciones_minimos": "1. Exigibilidad judicial inmediata de la vividenda digna: Reconocemos el derecho a la vividenda como derecho fundamental de amparo directo y prohibimos todo desahucio sin alternativa habitacional. 2. Tope del 20 % en alquileres y prohibición del acaparamiento: Limitamos el alcance del alquiler al 20 % de la renta de los hogares y prohibimos la acumulación especulativa de inmuebles."
+  },
+  "numero_articulo": "47",
+  "historial_boe": [
+    {
+      "fecha": "2026-05-20",
+      "boe_id": "BOE-A-1978-31229",
+      "rango": "Constitución Española (Texto Consolidado)",
+      "titulo_norma": "Constitución Española - Última actualización BOE-A-2026-10881",
+      "url_oficial": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229",
+      "estado_vigencia": "En vigor",
+      "sha256_xml": "4fb70ec0b23599abc45132358ca8c7beafb2c06a1e248fef965060abfe978dcb",
+      "fecha_vigor": null,
+      "fecha_limite_convalidacion": null
+    }
+  ],
+  "articulos_ce_relacionados": [
+    "33",
+    "53.3",
+    "128"
+  ],
+  "cierre": "_______",
+  "schema_version": "1.0",
+  "sha256_ficha": "f3efce4f898d46d91809b2bef5d001a458b4a3960f643e6304d6d0940e45e0d5",
+  "meta_extensible": {}
+}

@@ -1,0 +1,4 @@
+# La Sinstitución - Índice Auditable
+Merkle Root: df921d0ad2244dd91096567778d3de1898a5eb2601587317385cf9a9ef81dbad
+
+- art_047: data/constitucion/art_047.json

@@ -1,0 +1,28 @@
+name: Monitor Diario BOE y Tribunal Constitucional
+on:
+schedule:
+- cron: '15 7 * * 1-6'
+workflow_dispatch:
+permissions:
+contents: write
+pull-requests: write
+jobs:
+ingesta-boe:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout repositorio
+uses: actions/checkout@v4
+- name: Configurar Python 3.12
+uses: actions/setup-python@v5
+with:
+python-version: '3.12'
+- name: Instalar dependencias
+run: pip install -r requirements.txt
+- name: Ejecutar Aduana de Calidad (Pytest)
+run: pytest tests/
+- name: Consultar novedades sustantivas BOE
+env:
+LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
+LLM_MODEL: ${{ secrets.LLM_MODEL }}
+run: python -m engine.connectors.boe

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LA SINSTITUCION — Auditor Constitucional</title>
+<style>
+  :root {
+    --navy-dark: #0f172a;
+    --navy-mid: #182230;
+    --slate-bg: #f1f5f9;
+    --callout-bg: #eef2f7;
+    --border-color: #cbd5e1;
+    --text-main: #1e293b;
+    --text-muted: #475569;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--slate-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+  }
+  header {
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 1.25rem 1rem;
+    border-bottom: 4px solid #334155;
+    width: 100%;
+  }
+  .container {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 0.75rem;
+  }
+  .header-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 700;
+    word-break: break-word;
+  }
+  header h1 {
+    margin: 0.3rem 0;
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+  header p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+  }
+  .toolbar {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.85rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+  }
+  .toolbar-row {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  input[type="text"], select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    font-size: 0.92rem;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--text-main);
+  }
+  select {
+    font-weight: 600;
+    text-overflow: ellipsis;
+  }
+  button {
+    flex: 1;
+    font-size: 0.85rem;
+    padding: 0.55rem 0.6rem;
+    border-radius: 4px;
+    background: var(--navy-mid);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+  }
+  button.btn-sec { background: #e2e8f0; color: #0f172a; }
+  .documento-card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.25rem 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  @media (min-width: 640px) {
+    .documento-card { padding: 2rem; }
+    header h1 { font-size: 1.65rem; }
+  }
+  .doc-banner {
+    background: var(--navy-mid);
+    color: #fff;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .doc-title {
+    font-size: 1.3rem;
+    color: var(--navy-dark);
+    margin: 0 0 0.75rem 0;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .pregunta-critica {
+    background: var(--callout-bg);
+    border-left: 4px solid var(--navy-dark);
+    padding: 0.75rem 0.9rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--navy-dark);
+    margin-bottom: 1.25rem;
+  }
+  h4 {
+    background: #f8fafc;
+    border-bottom: 2px solid var(--navy-dark);
+    padding: 0.4rem 0.55rem;
+    color: var(--navy-dark);
+    font-size: 0.92rem;
+    margin-top: 1.5rem;
+  }
+  blockquote {
+    background: #f8fafc;
+    border-left: 3px solid #64748b;
+    margin: 0.85rem 0;
+    padding: 0.75rem 0.9rem;
+    font-style: italic;
+    color: #334155;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  code {
+    background: #eef2f7;
+    color: #0f172a;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.85em;
+    border: 1px solid #dce3ec;
+    word-break: break-word;
+  }
+  ul { padding-left: 1.2rem; }
+  li { margin-bottom: 0.5rem; }
+  .audit-footer {
+    margin-top: 1.75rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    word-break: break-word;
+  }
+  .callout-info {
+    background: #fffbeb;
+    border-left: 4px solid #b45309;
+    padding: 0.8rem 0.9rem;
+    font-size: 0.88rem;
+    margin-top: 1rem;
+  }
+  @media print {
+    .toolbar, button { display: none !important; }
+    body { background: #fff; }
+    .documento-card { border: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-tag">MOTOR DE AUDITORIA CONSTITUCIONAL · MASTER PROMPT 1.0</div>
+    <h1>LA SINSTITUCION — Examen Critico CE</h1>
+    <p>Contraste material, convencionalidad (arts. 10.2 y 96.1 CE) y trazabilidad BOE</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="toolbar">
+    <input type="text" id="filtro" placeholder="Filtrar (ej. 47, Amnistia, Final, Transitoria)..." oninput="filtrarSelector()">
+    <select id="selectorUnidad" onchange="cargarUnidad(this.value)"></select>
+    <div class="toolbar-row">
+      <button onclick="cargarUnidad(document.getElementById('selectorUnidad').value, true)">Auditar</button>
+      <button class="btn-sec" onclick="sincronizarBOE()">Sync BOE</button>
+      <button class="btn-sec" onclick="window.print()">PDF</button>
+    </div>
+  </div>
+
+  <div id="toastBOE" style="display:none;background:#0f172a;color:#fff;padding:0.55rem 0.85rem;border-radius:4px;font-size:0.82rem;margin-bottom:0.75rem;border-left:4px solid #22c55e;"></div>
+  <main class="documento-card" id="visor">
+    <div class="doc-banner" id="docBloque">CARGANDO...</div>
+    <h2 class="doc-title" id="docTitulo">Iniciando motor...</h2>
+    <div id="docContenido"></div>
+    <div class="audit-footer">
+      <span id="selloBOE">Verificacion BOE: pendiente</span>
+      <span>Enmienda: REGAGE26e00100941917</span>
+    </div>
+  </main>
+</div>
+
+<script>
+let catalogo = [];
+async function init() {
+  const r = await fetch('/api/catalogo');
+  const d = await r.json();
+  catalogo = d.unidades || [];
+  renderSelector(catalogo);
+  mostrarGuiaInicio();
+}
+function renderSelector(lista) {
+  const sel = document.getElementById('selectorUnidad');
+  sel.innerHTML = '<option value="GUIA_INICIO">— Guia de Uso y Presentacion de la Herramienta —</option>' +
+    lista.map(u => `<option value="${u.id}">${u.titulo} (${u.bloque})</option>`).join('');
+}
+function mostrarGuiaInicio() {
+  document.getElementById('docBloque').textContent = "PRESENTACION · MOTOR MASTER PROMPT 1.0";
+  document.getElementById('docTitulo').textContent = "Guia de Uso: Auditor Constitucional Interactivo";
+  document.getElementById('docContenido').innerHTML = `<p class="pregunta-critica">¿Que es esta herramienta y como auditar cualquier precepto de la Constitucion de 1978?</p>
+    <h4>I. PROPOSITO DE LA PLATAFORMA</h4><p><strong>LA SINSTITUCION</strong> somete las <strong>185 unidades normativas</strong> de la Constitucion espanola a un examen material, juridico y antiautoritario en seis secciones calibradas bajo el <strong>Master Prompt 1.0</strong>.</p>
+    <h4>II. USO RAPIDO</h4><ul><li><strong>1. Elige un precepto:</strong> Selecciona cualquier articulo o disposicion en el desplegable superior.</li><li><strong>2. Consulta o audita:</strong> Los preceptos auditados abren al instante; pulsa <strong>Auditar</strong> para regenerar en vivo.</li><li><strong>3. Exporta:</strong> Pulsa <strong>PDF</strong> para descargar el expediente maquetado.</li></ul>`;
+  document.getElementById('selloBOE').textContent = "Base de datos: 185 unidades CE sincronizadas con BOE";
+}
+async function cargarUnidad(uid, forzar=false) {
+  if (!uid || uid === 'GUIA_INICIO') { mostrarGuiaInicio(); return; }
+  const selTxt = document.getElementById('selectorUnidad').selectedOptions[0]?.text || uid;
+  document.getElementById('docBloque').textContent = "EN CURSO · MASTER PROMPT 1.0";
+  document.getElementById('docTitulo').textContent = selTxt;
+  document.getElementById('docContenido').innerHTML = "<p>Ejecutando auditoria bajo Master Prompt 1.0...</p>";
+  try {
+    const res = await fetch(`/api/unidad/${uid}?forzar=${forzar}`);
+    const data = await res.json();
+    if (!res.ok) {
+      document.getElementById('docContenido').innerHTML = `<div class="callout-info">${data.detail || 'Error del servidor'}</div>`;
+      return;
+    }
+    document.getElementById('docBloque').textContent = `${data.bloque} · ${data.origen}`;
+    document.getElementById('docTitulo').textContent = data.titulo;
+    document.getElementById('docContenido').innerHTML = data.analisis_html;
+    document.getElementById('selloBOE').textContent = `SHA-256 BOE: ${(data.hash_texto||'').substring(0,16)}... · Fecha: ${data.fecha_auditoria}`;
+  } catch (e) {
+    document.getElementById('docContenido').innerHTML = "<p>Generando expediente extenso en segundo plano, recuperando resultado...</p>";
+    for (let i = 0; i < 15; i++) {
+      await new Promise(r => setTimeout(r, 3000));
+      try {
+        const r2 = await fetch(`/api/unidad/${uid}?forzar=false`);
+        if (r2.ok) {
+          const d2 = await r2.json();
+          if (d2.origen === "CACHE_MASTER_1_0") {
+            document.getElementById('docBloque').textContent = `${d2.bloque} · ${d2.origen}`;
+            document.getElementById('docTitulo').textContent = d2.titulo;
+            document.getElementById('docContenido').innerHTML = d2.analisis_html;
+            document.getElementById('selloBOE').textContent = `SHA-256 BOE: ${(d2.hash_texto||'').substring(0,16)}... · Fecha: ${d2.fecha_auditoria}`;
+            return;
+          }
+        }
+      } catch (_) {}
+    }
+  }
+}
+async function sincronizarBOE() {
+  document.getElementById('selloBOE').textContent = "Verificando BOE...";
+  const r = await fetch('/api/sincronizar-boe', {method: 'POST'});
+  const d = await r.json();
+  document.getElementById('selloBOE').textContent = d.mensaje;
+}
+document.getElementById('filtro').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  renderSelector(catalogo.filter(u => u.titulo.toLowerCase().includes(q) || u.bloque.toLowerCase().includes(q)));
+});
+document.getElementById('selectorUnidad').addEventListener('change', e => cargarUnidad(e.target.value, false));
+init();
+</script>
+</body>
+</html>

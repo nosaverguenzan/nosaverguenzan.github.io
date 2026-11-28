@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Sinstitución - Auditoría Constitucional y BOE</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+  <header>
+    <h1>LA SINSTITUCIÓN </h1>
+    <p class="subtitle">Auditoría Constitucional Forense y Monitor DIARIO BOE</p>
+  </header>
+  <nav class="barra-nav">
+    <a href="../" class="btn">← Web Principal</a>
+    <button id="tab-docs" class="btn btn-active">Constitución y BOE</button>
+    <button id="tab-ia" class="btn">Consultor IA (Manual Técnico)</button>
+    <a href="downloads/compendio_sinstitucion.md" download class="btn">Descargar Compendio (.MD)</a>
+  </nav>
+  <main>
+    <section id="panel-docs">
+      <input type="search" id="buscador" class="buscador" placeholder="Buscar artículo, BOE-A-2026... o palabra clave">
+      <div id="lista-resultados" class="no-print" style="margin-bottom:1rem"></div>
+      <article id="visor-ficha" class="ficha">
+        <div class="no-print" style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap">
+          <button id="btn-imprimir" class="btn btn-primary">Imprimir / Guardar PDF (A4)</button>
+          <button id="btn-vista" class="btn">Vista Rápida / Completa</button>
+          <button id="btn-enviar-ia" class="btn">Analizar en Consultor IA</button>
+        </div>
+        <div id="contenido-ficha">Cargando documento...</div>
+      </article>
+    </section>
+    <section id="panel-consultor" class="oculto ficha">
+      <h2>Consultor IA - Modo Manual Técnico y Generador BOE</h2>
+      <p style="font-size:0.9rem;color:#444">Formula una consulta constitucional o pega un texto del BOE para generar un borrador bajo el Goldens Standard.</p>
+      <textarea id="input-ia" placeholder="Escribe tu consulta o pega el artículo del BOE..."></textarea>
+      <div style="margin-top:0.75rem;display:flex;gap:0.5rem">
+        <button id="btn-copiar-prompt" class="btn btn-primary">Copiar Prompt Listo para IA</button>
+        <button id="btn-imprimir-ia" class="btn">Imprimir Consulta</button>
+      </div>
+      <pre id="salida-ia" style="white-space:pre-wrap;background:#f4f4f4;padding:1rem;margin-top:1rem;font-family:inherit"></pre>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

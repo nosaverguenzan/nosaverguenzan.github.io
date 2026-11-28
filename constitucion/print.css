@@ -1,0 +1,12 @@
+@media print {
+  @page { size: A4; margin: 20šm 18mm 22mm 18mm; }
+  header, .barra-nav, .buscador, .no-print, #panel-consultor { display: none !important; }
+  body { background: #fff; color: #000; font-family: Georgia, "Times New Roman", serif; font-size: 11pt; line-height: 1.45; }
+  main { max-width: 100%; margin: 0; padding: 0; }
+  .ficha { border: none; padding: 0; }
+  .banda-boe { background: #f8f8f8; border: 1px solid #ccc; border-left: 3pt solid #000; }
+  .banda-boe a::after { content: " (" attr(href) ")"; font-size: 9pt; }
+  .seccion-bloque h3 { break-after: avoid; page-break-after: avoid; }
+  .cita-literal, .hash-bar, .cierre { break-inside: avoid; page-break-inside: avoid; }
+  .oculto { display: block !important; }
+}

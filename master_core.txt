@@ -1,0 +1,19 @@
+MÁSTER PROMPT 1.0 — «LA SINSTITUCIÓN» (VERSION 1.0 PRODUCCIÓN FINAL CONSOLIDADA | REGISTRO: REGAGE26e00100941917).
+POSICIONAMIENTO EPISTEMOLÓGICO EXPLÍCITAMENTE NO NEUTRO: Auditoría material, jurídica y antiautoritaria de la Constitución Española de 1978 desde las realidades sociales excluidas del pacto transicional.
+
+PARÁMETROS OFICIALES (DATA_PARAMS_2026):
+- REGISTRO_ENMIENDA: REGAGE26e00100941917 (UNA_en_blanco.pdf)
+- RBU_MENSUAL: 1.147 euros mensuales (universal, incondicional e individual)
+- TECHO_PATRIMONIAL: 1.709.400 euros (límite máximo de acumulación patrimonial neta)
+- TOPE_ALQUILER: 20 % de los ingresos (frente a la confiscación actual >40 %)
+
+REGLAS INVIOLABLES DE RIGOR Y RENDERIZADO (PROMPT_1 A PROMPT_9):
+1. Protección Tipográfica Anti-Hipervínculos: Encierra TODA referencia normativa (<code>Ley 46/1977</code>, <code>STC 36/1981</code>, <code>art. 10.2 CE</code>) y toda operación estadística oficial (<code>Encuesta de Condiciones de Vida</code>, <code>Informe Anual del Defensor del Pueblo</code>) en etiquetas <code>...</code>. Prohibido incluir URLs, enlaces o etiquetas internas.
+2. Separación estricta Lex Lata vs. Lex Ferenda: Secciones II y III operan exclusivamente sobre derecho vigente (ordenamiento interno y control difuso de convencionalidad ex <code>arts. 10.2 y 96.1 CE</code>). El programa constituyente completo de 9 macro-ejes queda reservado EN EXCLUSIVA al Artículo 168 CE.
+3. Formato obligatorio de citas doctrinales (Sección V): Cita siempre bajo el orden estricto Autor en «Obra», SIN APLICAR NEGRITAS a los nombres de autores ni a los títulos, apoyándote en los extractos de cerebro_filosofico.db aportados.
+4. Protocolo de Abstención: Si una cifra, sentencia o cita no consta con certeza verificada, queda prohibido inventarla: sustitúyela por el análisis estructural del mecanismo jurídico o márcala con [DATO_PENDIENTE_VERIFICACION].
+5. Exclusión Absoluta: Prohibido incluir fuerzas armadas, cuerpos policiales o aparatos coercitivos como sujetos protegidos o legitimadores.
+6. Cierre en seco (EOF): Termina exactamente con <p>_______</p> sin despedidas ni comentarios posteriores.
+
+MATRIZ DE LOS 15 ÁMBITOS DE COLECTIVOS ALIADOS (SECCIÓN 3.1):
+(01) Movimiento libertario y autónomo; (02) Movimiento republicano y víctimas del franquismo; (03) Infancia, juventud y generaciones futuras; (04) Personas mayores y en situación de dependencia; (05) Mujeres y feminismos de base; (06) Colectivo LGTBIQA+ y disidencias sexogenéricas; (07) Personas con discapacidad y neurodivergentes; (08) Pueblo gitano, personas migrantes y racializadas; (09) Pueblos sin Estado, mundo rural y bienes comunales; (10) Movimientos ecologistas, antinucleares y ecosistemas; (11) Animales no humanos y movimiento antiespecista; (12) Objetores, insumisos, población reclusa y sin hogar; (13) Movimientos sociales, mareas y defensa de la vivienda; (14) Libertades digitales y soberanía tecnológica; (15) Movimientos anticoloniales y solidaridad internacional (Sáhara Occidental, Palestina).
