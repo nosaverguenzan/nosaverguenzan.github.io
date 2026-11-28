@@ -17,9 +17,9 @@ async function iniciarWeb() {
 }
 
 function renderizarLista(lista) {
-  const cont = document.getElementById("hista-resultados") || document.getElementById("lista-resultados");
+  const cont = document.getElementById("lista-resultados") || document.getElementById("lista-resultados");
   cont.textContent = "";
-  lista.slice(0, 12).forEach(item => {
+  lista.forEach(item => {
     const btn = document.createElement("button");
     btn.className = "btn";
     btn.style.margin = "0.2rem";
